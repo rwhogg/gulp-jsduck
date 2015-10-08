@@ -1,0 +1,23 @@
+{
+  "name": "@rwhogg/gulp-jsduck",
+  "version": "0.0.0",
+  "description": "Gulp plugin for jsduck",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/rwhogg/gulp-jsduck"
+  },
+  "keywords": [
+    "gulp",
+    "jsduck",
+    "gulpplugin"
+  ],
+  "author": "Bob W. Hogg",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
