@@ -35,7 +35,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-var easejs = require("easejs");
+var Class = require("yajscf");
 var path = require("path");
 var gutil = require("gulp-util");
 var through = require("through2");
