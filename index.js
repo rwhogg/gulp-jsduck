@@ -37,6 +37,7 @@ module.exports = Class.extend(
      */
     init: function(options)
     {
+        console.log("init called with " + options);
         try
         {
             /**
@@ -62,7 +63,10 @@ module.exports = Class.extend(
         process.on("exit", _.bind(function()
         {
             console.log("atexit");
-            this.jsduck.doc(this.paths);
+            console.dir(this.paths);
+            var result = this.jsduck.doc(this.paths);
+            console.log("Back from docing. result == " );
+            console.dir(result);
         }, this));
     },
 
@@ -78,6 +82,7 @@ module.exports = Class.extend(
             // collect the file, but don't do anything with it yet
             console.log("Calling the stream function");
             me.paths.push(file.relative);
+            console.dir(me.paths);
             
             // pass the file to the next plugin
             this.push(file);

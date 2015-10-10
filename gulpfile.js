@@ -12,27 +12,15 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
 
-var File = require("vinyl");
+var gulp = require("gulp");
+var GJSDuck = require("./index.js");
+var gjsduck = new GJSDuck(["--out", "docs"]);
 var rimraf = require("rimraf").sync;
-var fs = require("fs");
-var GulpJSDuck = require("./index.js");
 
-test("gulp-jsduck", function(assert)
+gulp.task("test", function()
 {
     rimraf("docs");
-    var gjsduck = new GulpJSDuck(["--out docs"]);
-    console.dir(gjsduck);
-    var indexFile = new File(
-    {
-        contents: fs.readFileSync("index.js"),
-        relative: "index.js"
-    });
-    gjsduck.doc();
-    process.on("exit", function()
-    {
-        assert(fs.existsSync("docs/index.html"), "docs created!");
-    });
-    expect(0);
+    gulp.src("index.js")
+        .pipe(gjsduck.doc())
 });
