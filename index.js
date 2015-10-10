@@ -59,8 +59,9 @@ module.exports = Class.extend(
          * @private
          */
         this.paths = [];
-        process.on("beforeExit", _.bind(function()
+        process.on("exit", _.bind(function()
         {
+            console.log("atexit");
             this.jsduck.doc(this.paths);
         }, this));
     },
@@ -70,15 +71,18 @@ module.exports = Class.extend(
      */
     doc: function()
     {
-        var stream = through.obj(_.bind(function(file, encoding, callback)
+        console.log("Calling doc");
+        var me = this;
+        var stream = through.obj(function(file, encoding, callback)
         {
             // collect the file, but don't do anything with it yet
-            this.paths.push(file.relative);
-        }, this));
-
-        // pass the file to the next plugin
-        this.push(file);
-        callback();
+            console.log("Calling the stream function");
+            me.paths.push(file.relative);
+            
+            // pass the file to the next plugin
+            this.push(file);
+            callback();
+        });
         return stream;
     }
 });

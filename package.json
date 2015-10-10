@@ -4,7 +4,7 @@
   "description": "Gulp plugin for jsduck",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
   "author": "Bob W. Hogg",
   "license": "Apache-2.0",
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "qunit": "^0.7.7",
+    "rimraf": "^2.4.3"
   },
   "dependencies": {
     "gulp-util": "^3.0.6",
