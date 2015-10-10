@@ -72,6 +72,7 @@ module.exports = Class.extend(
     {
         var stream = through.obj(_.bind(function(file, encoding, callback)
         {
+            // collect the file, but don't do anything with it yet
             this.paths.push(file.relative);
         }, this));
 
