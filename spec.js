@@ -29,7 +29,6 @@ test("gulp-jsduck", function(assert)
         contents: fs.readFileSync("index.js"),
         relative: "index.js"
     });
-    console.dir(indexFile);
     gjsduck.doc();
     process.on("exit", function()
     {
