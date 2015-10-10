@@ -74,11 +74,11 @@ module.exports = Class.extend(
         {
             // collect the file, but don't do anything with it yet
             this.paths.push(file.relative);
+            
+            // pass the file to the next plugin
+            this.push(file);
+            callback();
         }, this));
-
-        // pass the file to the next plugin
-        this.push(file);
-        callback();
         return stream;
     }
 });

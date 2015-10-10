@@ -14,7 +14,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-test("dummy", function()
+var File = require("vinyl");
+var rimraf = require("rimraf").sync;
+var fs = require("fs");
+var GulpJSDuck = require("./index.js");
+
+test("gulp-jsduck", function(assert)
 {
-    ok(true, "This is just to confirm qunit is working.");
+    rimraf("docs");
+    var gjsduck = new GulpJSDuck(["--out docs"]);
+    console.dir(gjsduck);
+    var indexFile = new File(
+    {
+        contents: fs.readFileSync("index.js"),
+        relative: "index.js"
+    });
+    console.dir(indexFile);
+    gjsduck.doc();
+    process.on("exit", function()
+    {
+        assert(fs.existsSync("docs/index.html"), "docs created!");
+    });
+    expect(0);
 });

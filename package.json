@@ -18,7 +18,8 @@
   "author": "Bob W. Hogg",
   "license": "Apache-2.0",
   "devDependencies": {
-    "qunit": "^0.7.7"
+    "qunit": "^0.7.7",
+    "rimraf": "^2.4.3"
   },
   "dependencies": {
     "gulp-util": "^3.0.6",
