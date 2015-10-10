@@ -19,6 +19,7 @@ var JSDuck = require("jsduck-from-js");
 var through = require("through2");
 var gutil = require("gulp-util");
 var PluginError = gutil.PluginError;
+var _ = require("underscore");
 
 const PLUGIN_NAME = "gulp-jsduck";
 
@@ -30,7 +31,7 @@ const PLUGIN_NAME = "gulp-jsduck";
 module.exports = Class.extend(
 {
     /**
-     * Constructor
+     * @method constructor
      * @param {String[]} options Array of options to pass to the JSDuck gem
      * @throws {PluginError} If we cannot find the jsduck binary
      */
@@ -39,7 +40,7 @@ module.exports = Class.extend(
         try
         {
             /**
-             * @property {Object} jsduck
+             * @property {JSDuck} jsduck
              * JSDuck wrapper
              * @private
              */
@@ -49,5 +50,34 @@ module.exports = Class.extend(
         {
             throw new PluginError(PLUGIN_NAME, "could not find the JSDuck binary!");
         }
+
+        // since JSDuck overwrites index.html each time we execute it, we don't output right away.
+        // instead, we collect the file names and schedule the output before Node.js exits.
+        /**
+         * @property {String[]} paths
+         * List of paths to make documentation for
+         * @private
+         */
+        this.paths = [];
+        process.on("beforeExit", _.bind(function()
+        {
+            this.jsduck.doc(this.paths);
+        }, this));
+    },
+
+    /**
+     * Pipe data to this function to get JSDoc output
+     */
+    doc: function()
+    {
+        var stream = through.obj(_.bind(function(file, encoding, callback)
+        {
+            this.paths.push(file.relative);
+        }, this));
+
+        // pass the file to the next plugin
+        this.push(file);
+        callback();
+        return stream;
     }
 });
