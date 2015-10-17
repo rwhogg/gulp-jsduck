@@ -2,13 +2,7 @@
 ## A gulp plugin for [jsduck](https://github.com/senchalabs/jsduck)
 
 ## Installing
-You'll need to install jsduck manually:
-
-```bash
-$ sudo gem install jsduck;
-```
-
-Then add gulp-jsduck as a dev dependency:
+Add gulp-jsduck as a dev dependency:
 ```bash
 $ npm install --save-dev gulp-jsduck;
 ```
