@@ -61,7 +61,12 @@ module.exports = Class.extend(
         this.paths = [];
         process.on("exit", _.bind(function()
         {
-            var result = this.jsduck.doc(this.paths);
+            var result = this.jsduck.doc(this.paths); // deliberately throw any exceptions
+            if(result.status)
+            {
+                // execution failed
+                console.error(result.output.toString());
+            }
         }, this));
     },
 
