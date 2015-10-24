@@ -81,7 +81,7 @@ module.exports = Class.extend(
         {
             // collect the file, but don't do anything with it yet
             me.paths.push(file.path);
-            
+
             // pass the file to the next plugin
             this.push(file);
             callback();
