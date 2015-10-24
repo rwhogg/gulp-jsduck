@@ -7,6 +7,20 @@ Add gulp-jsduck as a dev dependency:
 $ npm install --save-dev gulp-jsduck;
 ```
 
+## Usage
+gulp-jsduck can be used similarly to other Gulp plugins. Just pipe files to it and it will document them:
+```js
+var gulp = require("gulp");
+var GJSDuck = require("gulp-jsduck");
+var gjsduck = new GJSDuck(["--out", "docs"]);
+
+gulp.task("default", function()
+{
+    gulp.src("src/**.js")
+        .pipe(gjsduck.doc());
+});
+```
+
 ## License
 Copyright © 2015 Bob W. Hogg. All Rights Reserved.
 

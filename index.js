@@ -71,6 +71,7 @@ module.exports = Class.extend(
     },
 
     /**
+     * @method doc
      * Pipe data to this function to get JSDoc output
      */
     doc: function()
@@ -79,7 +80,7 @@ module.exports = Class.extend(
         var stream = through.obj(function(file, encoding, callback)
         {
             // collect the file, but don't do anything with it yet
-            me.paths.push(file.relative);
+            me.paths.push(file.path);
             
             // pass the file to the next plugin
             this.push(file);
