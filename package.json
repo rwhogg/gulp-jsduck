@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "gulp-util": "^3.0.6",
-    "jsduck-from-js": "^0.1.3",
+    "jsduck": "^0.1.5",
     "through2": "^2.0.0",
     "underscore": "^1.8.3",
     "yajscf": "^1.0.3"
