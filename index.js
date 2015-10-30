@@ -15,7 +15,7 @@
 // limitations under the License.
 
 var Class = require("yajscf");
-var JSDuck = require("jsduck-from-js");
+var JSDuck = require("jsduck");
 var through = require("through2");
 var gutil = require("gulp-util");
 var PluginError = gutil.PluginError;
