@@ -1,6 +1,8 @@
 # gulp-jsduck
 ## A gulp plugin for [jsduck](https://github.com/senchalabs/jsduck)
 
+[![Build Status](https://travis-ci.org/rwhogg/gulp-jsduck.svg?branch=master)](https://travis-ci.org/rwhogg/gulp-jsduck)
+
 ## Installing
 Add gulp-jsduck as a dev dependency:
 ```bash
