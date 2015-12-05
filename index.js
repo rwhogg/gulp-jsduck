@@ -62,10 +62,15 @@ module.exports = Class.extend(
         process.on("exit", _.bind(function()
         {
             var result = this.jsduck.doc(this.paths); // deliberately throw any exceptions
+            var output = result.output.toString();
             if(result.status)
             {
                 // execution failed
-                console.error(result.output.toString());
+                console.error(output);
+            }
+            else
+            {
+                console.log(output);
             }
         }, this));
     },
