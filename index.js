@@ -1,4 +1,4 @@
-// Copyright © 2015 Bob W. Hogg. All Rights Reserved.
+// Copyright © 2015 - 2016 Bob W. Hogg. All rights reserved.
 //
 // This file is part of gulp-jsduck.
 //
@@ -59,20 +59,6 @@ module.exports = Class.extend(
          * @private
          */
         this.paths = [];
-        process.on("exit", _.bind(function()
-        {
-            var result = this.jsduck.doc(this.paths); // deliberately throw any exceptions
-            var output = result.output.toString();
-            if(result.status)
-            {
-                // execution failed
-                console.error(output);
-            }
-            else
-            {
-                console.log(output);
-            }
-        }, this));
     },
 
     /**
@@ -82,7 +68,7 @@ module.exports = Class.extend(
     doc: function()
     {
         var me = this;
-        var stream = through.obj(function(file, encoding, callback)
+        var stream = through.obj(function transform(file, encoding, callback)
         {
             // collect the file, but don't do anything with it yet
             me.paths.push(file.path);
@@ -90,6 +76,26 @@ module.exports = Class.extend(
             // pass the file to the next plugin
             this.push(file);
             callback();
+        }, function flush()
+        {
+            try
+            {
+                var result = me.jsduck.doc(me.paths);
+                var output = result.output.toString();
+                if(result.status)
+                {
+                    // execution failed
+                    throw new PluginError(PLUGIN_NAME, output);
+                }
+                else
+                {
+                    console.log(output);
+                }
+            }
+            catch(e)
+            {
+                throw new PluginError(PLUGIN_NAME, e.toString());
+            }
         });
         return stream;
     }
