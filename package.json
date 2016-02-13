@@ -16,7 +16,7 @@
     "gulpplugin"
   ],
   "author": "Bob W. Hogg",
-  "license": "Apache-2.0",
+  "license": "BSD-3-Clause",
   "devDependencies": {
     "gulp": "^3.9.0",
     "rimraf": "^2.4.4"
