@@ -4,6 +4,7 @@
   "description": "Gulp plugin for jsduck",
   "main": "index.js",
   "scripts": {
+    "prepublish": "git submodule update --init && git submodule update && gulp lint",
     "test": "gulp test"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-jscs": "^3.0.2",
     "rimraf": "^2.4.4"
   },
   "dependencies": {
