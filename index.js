@@ -3,7 +3,6 @@ var JSDuck = require("jsduck");
 var through = require("through2");
 var gutil = require("gulp-util");
 var PluginError = gutil.PluginError;
-var _ = require("underscore");
 
 const PLUGIN_NAME = "gulp-jsduck";
 
