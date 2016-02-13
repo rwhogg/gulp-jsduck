@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">var Class = require(&quot;yajscf&quot;);
+var JSDuck = require(&quot;jsduck&quot;);
+var through = require(&quot;through2&quot;);
+var gutil = require(&quot;gulp-util&quot;);
+var PluginError = gutil.PluginError;
+
+const PLUGIN_NAME = &quot;gulp-jsduck&quot;;
+
+<span id='GulpJSDuck'>/**
+</span> * @class GulpJSDuck
+ * GulpJSDuck is a Gulp plugin for [jsduck](https://github.com/senchalabs/jsduck)
+ * It supports all the options the command-line version does
+ */
+module.exports = Class.extend(
+{
+<span id='GulpJSDuck-method-constructor'>    /**
+</span>     * @method constructor
+     * @param {String[]} options Array of options to pass to the JSDuck gem
+     * @throws {PluginError} If we cannot find the jsduck binary
+     */
+    init: function(options)
+    {
+        try
+        {
+<span id='GulpJSDuck-property-jsduck'>            /**
+</span>             * @property {JSDuck} jsduck
+             * JSDuck wrapper
+             * @private
+             */
+            this.jsduck = new JSDuck(options);
+        }
+        catch(e)
+        {
+            throw new PluginError(PLUGIN_NAME, &quot;could not find the JSDuck binary!&quot;);
+        }
+
+        // since JSDuck overwrites index.html each time we execute it, we don&#39;t output right away.
+        // instead, we collect the file names and schedule the output before Node.js exits.
+<span id='GulpJSDuck-property-paths'>        /**
+</span>         * @property {String[]} paths
+         * List of paths to make documentation for
+         * @private
+         */
+        this.paths = [];
+    },
+
+<span id='GulpJSDuck-method-doc'>    /**
+</span>     * @method doc
+     * Pipe data to this function to get JSDoc output
+     */
+    doc: function()
+    {
+        var me = this;
+        var stream = through.obj(function transform(file, encoding, callback)
+        {
+            // collect the file, but don&#39;t do anything with it yet
+            me.paths.push(file.path);
+
+            // pass the file to the next plugin
+            this.push(file);
+            callback();
+        }, function flush()
+        {
+            try
+            {
+                var result = me.jsduck.doc(me.paths);
+                var output = result.output.toString();
+                if(result.status)
+                {
+                    // execution failed
+                    throw new PluginError(PLUGIN_NAME, output);
+                }
+                else
+                {
+                    console.log(output);
+                }
+            }
+            catch(e)
+            {
+                throw new PluginError(PLUGIN_NAME, e.toString());
+            }
+        });
+        return stream;
+    }
+});
+</pre>
+</body>
+</html>
