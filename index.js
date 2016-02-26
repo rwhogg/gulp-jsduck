@@ -11,17 +11,14 @@ const PLUGIN_NAME = "gulp-jsduck";
  * GulpJSDuck is a Gulp plugin for [jsduck](https://github.com/senchalabs/jsduck)
  * It supports all the options the command-line version does
  */
-module.exports = Class.extend(
-{
+module.exports = Class.extend({
     /**
      * @method constructor
      * @param {String[]} options Array of options to pass to the JSDuck gem
      * @throws {PluginError} If we cannot find the jsduck binary
      */
-    init: function(options)
-    {
-        try
-        {
+    init: function(options) {
+        try{
             /**
              * @property {JSDuck} jsduck
              * JSDuck wrapper
@@ -29,8 +26,7 @@ module.exports = Class.extend(
              */
             this.jsduck = new JSDuck(options);
         }
-        catch(e)
-        {
+        catch(e) {
             throw new PluginError(PLUGIN_NAME, "could not find the JSDuck binary!");
         }
 
@@ -48,35 +44,28 @@ module.exports = Class.extend(
      * @method doc
      * Pipe data to this function to get JSDoc output
      */
-    doc: function()
-    {
+    doc: function() {
         var me = this;
-        var stream = through.obj(function transform(file, encoding, callback)
-        {
+        var stream = through.obj(function transform(file, encoding, callback) {
             // collect the file, but don't do anything with it yet
             me.paths.push(file.path);
 
             // pass the file to the next plugin
             this.push(file);
             callback();
-        }, function flush()
-        {
-            try
-            {
+        }, function flush() {
+            try {
                 var result = me.jsduck.doc(me.paths);
                 var output = result.output.toString();
-                if(result.status)
-                {
+                if(result.status) {
                     // execution failed
                     throw new PluginError(PLUGIN_NAME, output);
                 }
-                else
-                {
+                else{
                     console.log(output);
                 }
             }
-            catch(e)
-            {
+            catch(e) {
                 throw new PluginError(PLUGIN_NAME, e.toString());
             }
         });
