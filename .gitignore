@@ -1,3 +1,5 @@
 node_modules
 docs
 checkstyle.xml
+git-standards.ini
+phpcs.xml
