@@ -43,6 +43,7 @@ module.exports = Class.extend({
     /**
      * @method doc
      * Pipe data to this function to get JSDoc output
+     * @return {Object} The JSDuck stream
      */
     doc: function() {
         var me = this;
