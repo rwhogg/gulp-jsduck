@@ -61,7 +61,7 @@ module.exports = Class.extend({
                     // execution failed
                     throw new PluginError(PLUGIN_NAME, output);
                 }
-                else{
+                else {
                     console.log(output);
                 }
             }
