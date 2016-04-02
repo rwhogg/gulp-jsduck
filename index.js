@@ -53,7 +53,7 @@ module.exports = Class.extend({
             // pass the file to the next plugin
             this.push(file);
             callback();
-        }, function flush() {
+        }, function flush(callback) {
             try {
                 var result = me.jsduck.doc(me.paths);
                 var output = result.output.toString();
@@ -68,6 +68,7 @@ module.exports = Class.extend({
             catch(e) {
                 throw new PluginError(PLUGIN_NAME, e.toString());
             }
+            callback();
         });
         return stream;
     }
