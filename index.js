@@ -18,7 +18,7 @@ module.exports = Class.extend({
      * @throws {PluginError} If we cannot find the jsduck binary
      */
     init: function(options) {
-        try{
+        try {
             /**
              * @property {JSDuck} jsduck
              * JSDuck wrapper
