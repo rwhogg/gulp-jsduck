@@ -1,6 +1,6 @@
 {
   "name": "gulp-jsduck",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Gulp plugin for jsduck",
   "main": "index.js",
   "scripts": {
