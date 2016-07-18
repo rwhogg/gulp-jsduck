@@ -20,8 +20,8 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-jscs": "^3.0.2",
-    "rimraf": "^2.4.4"
+    "gulp-jscs": "^4.0.0",
+    "rimraf": "^2.5.3"
   },
   "dependencies": {
     "gulp-util": "^3.0.6",
